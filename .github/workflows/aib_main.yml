@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Azure Image Builder workflow
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+   [ issues ]
+  #push:
+    #branches: [ master ]
+  #pull_request:
+    #branches: [ master ]
+ 
+# workflow run is made up of steps to create and run Azure image builder to build custom images 
+jobs:
+  # This workflow contains a single job called "build"
+  aib_template_job:
+    name: define parameters and update parameters file
+    runs-on: ubuntu-latest
+    env: 
+      aib_template_name: "ubuntuserver_mdi"
+      parameters: " "
+      
+    steps:
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@master
+      
+      - name: azure authentication
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Run script to create parameters files
+        run: |
+          
+
+      - name: azure Image builder prerequisites
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            
+
