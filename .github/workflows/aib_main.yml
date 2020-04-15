@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       aib_template_name: "ubuntuserver_mdi"
-      aib_resource_group: "lnochiliRG"
+      aib_resource_group: "iblinuxgalleryRG"
       aib_template_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json
       aib_template_parameters_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json
    
