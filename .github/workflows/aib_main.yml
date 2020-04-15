@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Azure Image Builder workflow
+name: Azure Image Builder workflow for Managed image distribution
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -15,22 +15,26 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   aib_template_job:
-    name: define parameters and update parameters file
+    name: define parameters and create Azure Image Builder template
     runs-on: ubuntu-latest
     env: 
       aib_template_name: "ubuntuserver_mdi"
-      parameters: " "
-      
-    steps:
-      - name: 'Checkout Github Action'
-        uses: actions/checkout@master
-      
-      - name: azure authentication
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Run script to create parameters files
-        run: |
+      aib_resource_group: "lnochiliRG"
+      aib_template_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json
+      aib_template_parameters_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json
+   
+      steps:
+        - name: 'Checkout Github Action'
+          uses: actions/checkout@master
+        - name: azure authentication
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+        - name: Run script to create parameters files
+          run: |
+               lll
+               kkk
+               
           
 
       - name: azure Image builder prerequisites
