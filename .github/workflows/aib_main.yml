@@ -30,16 +30,12 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
-        - name: Run script to create parameters files
-          run: |
-               lll
-               kkk
-               
-          
-
-      - name: azure Image builder prerequisites
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
+        - name: 'azure Image builder run to create managed image'
+          uses: azure/CLI@v1
+          with:
+            inlineScript: |
+              az resource create --resource-group ${{ env.aib_resource_group }} --template-file ${{ env.aib_template_url }} --parameters-file @${{ env.aib_template_parameters_url }} --is-full-object --name ${{ env.aib_template_name }}
+              az image builder run --resource-group ${{ env.aib_resource_group }}  --name ${{ env.aib_template_name }} 
+  
             
 
