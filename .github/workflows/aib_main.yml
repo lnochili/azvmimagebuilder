@@ -34,7 +34,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az resource create --resource-group ${{ env.aib_resource_group }} --template-file ${{ env.aib_template_url }} --parameters-file @${{ env.aib_template_parameters_url }} --is-full-object --name ${{ env.aib_template_name }}
+              az resource create --resource-group ${{ env.aib_resource_group }} --template-file ${{ env.aib_template_url }} --parameters @${{ env.aib_template_parameters_url }} --is-full-object --name ${{ env.aib_template_name }}
               az image builder run --resource-group ${{ env.aib_resource_group }}  --name ${{ env.aib_template_name }} 
   
             
