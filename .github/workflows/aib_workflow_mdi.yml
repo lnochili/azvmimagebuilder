@@ -32,8 +32,8 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json ./template_mdi.json
-            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json ./params_mdi.json
+            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json > ./template_mdi.json
+            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json > ./params_mdi.json
             az group deployment create --resource-group ${{ env.aib_resource_group }} --template-uri ./template_mdi.json --parameters @./parameters_mdi.json --is-full-object --name ${{ env.aib_template_name }}
             az image builder run --resource-group ${{ env.aib_resource_group }}  --name ${{ env.aib_template_name }} 
   
