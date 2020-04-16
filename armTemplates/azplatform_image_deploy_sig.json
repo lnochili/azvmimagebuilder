@@ -40,10 +40,6 @@
         }
     },
     
-    "variables": {
-      "resourceid": "[concat(parameters('galleryImageId'),parameters('sharedgalimagename'))]"
-    },
-
 
     "resources": [
       {
@@ -72,7 +68,7 @@
                 [
                   {
                     "type": "SharedImage",
-                    "galleryImageId": "[variables('resourceid')]",
+                    "galleryImageId": "[parameters('galleryImageId')]",
                     "runOutputName": "[parameters('sharedgalimagename')]",
                     "aritfactTags": {
                       "source": "azVmImageBuilder",
