@@ -40,7 +40,6 @@
         }
     },
     
-
     "resources": [
       {
         "name": "[parameters('imagetemplatename')]",
