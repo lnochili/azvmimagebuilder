@@ -6,7 +6,7 @@ name: Azure Image Builder workflow for Managed image distribution
 # events but only for the master branch
 on:
   push:
-    paths:  [ .github/workflows/aib_main.yml ] 
+    paths:  [ .github/workflows/aib_workflow_mdi.yml ] 
     #branches: [ master ]
   #pull_request:
     #branches: [ master ]
@@ -20,9 +20,7 @@ jobs:
     env: 
       aib_template_name: "ubuntuserver_mdi"
       aib_resource_group: "iblinuxgalleryRG"
-      aib_template_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json
-      aib_template_parameters_url: https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json
-   
+        
     steps:
       - name: 'Checkout Github Action'
         uses: actions/checkout@master
@@ -34,8 +32,10 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az resource create --resource-group ${{ env.aib_resource_group }} --template-file ${{ env.aib_template_url }} --parameters @${{ env.aib_template_parameters_url }} --is-full-object --name ${{ env.aib_template_name }}
-              az image builder run --resource-group ${{ env.aib_resource_group }}  --name ${{ env.aib_template_name }} 
+            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_deploy_mdi.json ./template_mdi.json
+            curl https://raw.githubusercontent.com/lnochili/azvmimagebuilder/master/armTemplates/azplatform_image_params_mdi.json ./params_mdi.json
+            az group deployment create --resource-group ${{ env.aib_resource_group }} --template-uri ./template_mdi.json --parameters @./parameters_mdi.json --is-full-object --name ${{ env.aib_template_name }}
+            az image builder run --resource-group ${{ env.aib_resource_group }}  --name ${{ env.aib_template_name }} 
   
             
 
